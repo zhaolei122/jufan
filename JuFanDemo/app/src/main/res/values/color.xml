@@ -2,4 +2,5 @@
 <resources>
     <color name="text_font_color">#D83A51</color>
     <color name="tab_light_color">#D83A51</color>
+    <color name="global_bg">#eeeff3</color>
 </resources>
