@@ -3,6 +3,8 @@ package com.jufan.demo.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +17,6 @@ import android.widget.RadioGroup;
 import com.jufan.demo.R;
 import com.jufan.demo.activity.FuHaoActivity;
 import com.jufan.demo.activity.SearchActivity;
-import com.jufan.demo.adapter.ViewPagerAdapter;
 import com.jufan.demo.util.IntentUtils;
 
 import java.util.ArrayList;
@@ -36,7 +37,7 @@ public class ShouyeFragment extends Fragment implements View.OnClickListener{
     private LinearLayout lallid;
     private ImageView championimgid;
     private ViewPager vpid;
-    private List<Fragment> list;
+    private List<Fragment> list = new ArrayList<>();
 
     @Nullable
     @Override
@@ -44,8 +45,8 @@ public class ShouyeFragment extends Fragment implements View.OnClickListener{
         shouye = inflater.inflate(R.layout.fragment_shouye,null);
         initialize();
         initFragment();
-        ViewPagerAdapter vpadapter = new ViewPagerAdapter(getFragmentManager(),list);
-        vpid.setAdapter(vpadapter);
+
+        vpid.setAdapter(new MyPagerAdapter(getActivity().getSupportFragmentManager()));
         vpid.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -84,14 +85,20 @@ public class ShouyeFragment extends Fragment implements View.OnClickListener{
         return shouye;
     }
 
+
+
+
     private void initFragment() {
-        list = new ArrayList<>();
         GuanZhuFragment guanzhu = new GuanZhuFragment();
         HoeFragment hot = new HoeFragment();
         NewFragment news = new NewFragment();
         list.add(guanzhu);
         list.add(hot);
         list.add(news);
+
+
+
+
     }
     //添加fragment
     private void initialize() {
@@ -117,27 +124,45 @@ public class ShouyeFragment extends Fragment implements View.OnClickListener{
                 IntentUtils.intentClass(getActivity(), SearchActivity.class);
                 break;
             case R.id.gb_one_id:
+                vpid.setCurrentItem(0);
+
                 gboneid.setTextSize(25);
                 gbtwoid.setTextSize(17);
                 gbthreeid.setTextSize(17);
-                vpid.setCurrentItem(0);
                 break;
             case R.id.gb_two_id:
+                vpid.setCurrentItem(1);
+
                 gbtwoid.setTextSize(25);
                 gboneid.setTextSize(17);
                 gbthreeid.setTextSize(17);
-                vpid.setCurrentItem(1);
                 break;
             case R.id.gb_three_id:
+                vpid.setCurrentItem(2);
                 gbthreeid.setTextSize(25);
                 gbtwoid.setTextSize(17);
                 gboneid.setTextSize(17);
-                vpid.setCurrentItem(2);
                 break;
             case R.id.champion_img_id:
                 IntentUtils.intentClass(getActivity(), FuHaoActivity.class);
                 break;
 
+        }
+    }
+
+    class MyPagerAdapter extends FragmentPagerAdapter {
+        public MyPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return list.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return list.size();
         }
     }
 
