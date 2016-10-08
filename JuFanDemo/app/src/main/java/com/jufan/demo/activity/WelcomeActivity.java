@@ -35,7 +35,7 @@ public class WelcomeActivity extends AppCompatActivity {
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    startActivity(new Intent(WelcomeActivity.this,LoginActivity.class));
+                    startActivity(new Intent(WelcomeActivity.this,MainActivity.class));
                     finish();
                 }
             },2000);

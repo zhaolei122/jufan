@@ -44,5 +44,8 @@ dependencies {
     androidTestCompile 'junit:junit:4.12'
     compile 'com.google.android.gms:play-services-appindexing:8.4.0'
     compile 'com.android.support:cardview-v7:21.0.0'
-
+    compile files('libs/umeng_social_apiv6.0.0.jar')
+    compile files('libs/umeng_social_netv6.0.0.jar')
+    compile files('libs/umeng_social_viewv6.0.0.jar')
+    compile files('libs/SocialSDK_umengqq.jar')
 }
